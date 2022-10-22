@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 '''root of views'''
 from sre_parse import State
 from flask import jsonify
@@ -20,11 +21,11 @@ def status():
 def stats():
     '''fetches stats'''
     data= {
-        "amenities": storage.all(Amenity), 
-        "cities": storage.all(City), 
-        "places": storage.all(Place), 
-        "reviews": storage.all(Review), 
-        "states": storage.all(State), 
-        "users": storage.all(User)
+        "amenities": storage.count(Amenity), 
+        "cities": storage.count(City), 
+        "places": storage.count(Place), 
+        "reviews": storage.count(Review), 
+        "states": storage.count(State), 
+        "users": storage.count(User)
     }
     return jsonify(data)
