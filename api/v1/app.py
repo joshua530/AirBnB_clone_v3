@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 '''api entry point'''
 from api.v1.views import app_views
-from flask import Flask
+from flask import Flask, jsonify, make_response
 from models import storage
 import os
 
@@ -17,6 +17,12 @@ HBNB_API_PORT = int(os.getenv('HBNB_API_PORT', '5000'))
 def teardown(self):
     '''close query after each session'''
     storage.close()
+
+
+@app.errorhandler(404)
+def not_found(error):
+    '''404 error handler'''
+    return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 if __name__ == '__main__':
